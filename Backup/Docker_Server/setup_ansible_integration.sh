@@ -22,5 +22,3 @@ echo "ansiblePlaybook playbook: '$ANSIBLE_PLAYBOOK_PATH'"
 
 # Reminder for manual steps
 echo "Remember to manually configure Jenkins and place the Ansible playbooks in an accessible location."
-
-
