@@ -1,0 +1,8 @@
+---
+- hosts: docker
+  become: true
+  tasks:
+    - name: Initialize Docker Swarm
+      command: docker swarm init
+    - name: Deploy Stack
+      command: docker stack deploy --compose-file /path/to/docker-compose.yml mystack
