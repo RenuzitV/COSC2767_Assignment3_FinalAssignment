@@ -1,6 +1,8 @@
 # Execution Steps
 
-* Run the Ansible Server Setup Script: Execute `setup_ansible_server.sh` on the EC2 instance designated as the Ansible server.
+* Run the Ansible Server Setup
+  
+* Execute `setup_ansible_server.sh` on the EC2 instance designated as the Ansible server.
 
 * Run the Docker Server Setup Script: Execute `setup_docker_server.sh` on the EC2 instance designated as the Docker server.
 
