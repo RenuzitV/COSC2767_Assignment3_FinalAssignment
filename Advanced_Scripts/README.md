@@ -14,4 +14,4 @@
 
 * Deploy the Application: Run the Jenkins job to build the Docker image, push it to DockerHub, and deploy it using the Ansible playbooks.
 
-* These scripts and playbooks are tailored to follow the instructions from your documents closely.
+* These scripts and playbooks are tailored to follow the instructions from documents.
