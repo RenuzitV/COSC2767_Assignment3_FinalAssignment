@@ -1,16 +1,3 @@
-#!/bin/bash
-
-# Become the root user
-sudo su -
-
-# Set the hostname
-echo "ansible_server" > /etc/hostname
-
-# Reboot the system to apply hostname change
-reboot
-
-# After reboot, log back in and continue with the script
-
 # Create the ansibleadmin user with a predefined password
 useradd ansibleadmin
 echo "ansibleadmin:ansibleadmin" | chpasswd
