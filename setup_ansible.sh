@@ -4,7 +4,7 @@
 sudo su -
 
 # Set the hostname
-echo "ansible_Server" > /etc/hostname
+echo "ansible_server" > /etc/hostname
 
 # Reboot the system to apply hostname change
 reboot
