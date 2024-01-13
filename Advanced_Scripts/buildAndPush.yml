@@ -1,9 +1,0 @@
----
-- hosts: ansibleserver
-  tasks:
-  - name: create docker image
-    command: docker build -t myapp:latest .
-  - name: create tag to push the image to dockerhub
-    command: docker tag myapp:latest tomhuynhsg/myapp:latest
-  - name: push the docker image to dockerhub
-    command: docker push tomhuynhsg/myapp:latest
