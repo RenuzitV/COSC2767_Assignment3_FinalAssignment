@@ -1,7 +1,7 @@
 FROM mariadb:latest
 
 # Copy the initialization script to the docker entrypoint directory
-COPY ./db-init.sql /docker-entrypoint-initdb.d/
+COPY db-init.sql /docker-entrypoint-initdb.d/
 
 # Set environment variables
 ENV MYSQL_ROOT_PASSWORD=rmit_password
