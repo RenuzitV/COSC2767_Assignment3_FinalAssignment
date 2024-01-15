@@ -1,14 +1,12 @@
-cd RMIT-Store
+chmod +x Database/db-script.sh
 
-chmod +x db-script.sh
+./Database/db-script.sh
 
-./db-script.sh
+chmod +x RMIT-Store/store-script.sh
 
-chmod +x store-script.sh
+./RMIT-Store/store-script.sh
 
-./store-script.sh
-
-cd ../Kubernetes
+cd Kubernetes
 
 kubectl delete all --all --namespace=default
 
