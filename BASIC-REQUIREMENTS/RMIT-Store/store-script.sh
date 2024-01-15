@@ -10,9 +10,9 @@ cd COSC2767-RMIT-Store
 
 docker build -t rmitstore .
 
-docker tag rmitstore:latest $ECR_REPO_URI
+docker tag rmitstore:latest $ECR_REPO_UR:latest
 
-docker push $ECR_REPO_URI
+docker push $ECR_REPO_URI:latest
 
 # docker kill rmitstore
 
