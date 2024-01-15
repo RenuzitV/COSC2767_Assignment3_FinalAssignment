@@ -20,15 +20,17 @@ spec:
         app: demo-store-app
     spec:
       containers:
-        - name: mariadb
-          image: mariadb
-          ports:
-            - containerPort: 3306
-          env:
-            - name: mariadb_USER
-              value: "mariadb"
-            - name: mariadb_PASSWORD
-              value: "mariadb"
-            - name: mariadb_HOST_AUTH_METHOD
-              value: trust
+      - name: mariadb
+        image: 959445117732.dkr.ecr.us-east-1.amazonaws.com/mariadb
+        env:
+        - name: MYSQL_USER
+          value: "mariadb"
+        - name:  MYSQL_PASSWORD
+          value: "mariadb"
+        - name: MYSQL_ROOT_HOST
+          value: "%"
+        - name: MYSQL_ROOT_PASSWORD
+          value: "mariadb"
+        ports:
+        - containerPort: 3306
      
