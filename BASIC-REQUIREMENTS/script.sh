@@ -1,10 +1,16 @@
-chmod +x Database/db-script.sh
+cd Database
 
-./Database/db-script.sh
+chmod +x db-script.sh
 
-chmod +x RMIT-Store/store-script.sh
+./db-script.sh
 
-./RMIT-Store/store-script.sh
+cd ..
+
+cd RMIT-Store
+
+chmod +x store-script.sh
+
+./store-script.sh
 
 cd Kubernetes
 
