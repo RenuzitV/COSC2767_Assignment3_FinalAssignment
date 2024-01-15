@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: store-app-pod
+  labels:
+    name: store-app-pod
+    app: demo-store-app
+spec:
+  containers:
+  - name: store-app
+    image: 959445117732.dkr.ecr.us-east-1.amazonaws.com/rmitstore
+    ports:
+         - containerPort: 80

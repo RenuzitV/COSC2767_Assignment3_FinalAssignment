@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mariadb-pod
+  labels:
+    name: mariadb-pod
+    app: demo-store-app
+spec:
+  containers:
+  - name: mariadb
+    image: 959445117732.dkr.ecr.us-east-1.amazonaws.com/mariadb
+    env:
+    - name: mariadb_USER
+      value: "mariadb"
+    - name:  mariadb_PASSWORD
+      value: "mariadb"
+    - name: mariadb_HOST_AUTH_METHOD
+      value: trust
+    ports:
+     - containerPort: 3306
