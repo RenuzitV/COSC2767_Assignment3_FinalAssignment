@@ -12,4 +12,4 @@ docker push $DB_REPO_URI:latest
 
 # docker rm mariadb
 
-# docker run --name mariadb -p 3306:3306 -d mariadb
+# docker run --name mariadb -p 3306:3306 -d --network test_network mariadb
