@@ -24,13 +24,13 @@ spec:
         image: 959445117732.dkr.ecr.us-east-1.amazonaws.com/mariadb
         env:
         - name: MYSQL_USER
-          value: "mariadb"
+          value: "db_admin"
         - name:  MYSQL_PASSWORD
-          value: "mariadb"
+          value: "rmit_password"
         - name: MYSQL_ROOT_HOST
           value: "%"
         - name: MYSQL_ROOT_PASSWORD
-          value: "mariadb"
+          value: "rmit_password"
         ports:
         - containerPort: 3306
      
