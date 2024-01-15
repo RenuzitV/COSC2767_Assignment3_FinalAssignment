@@ -12,7 +12,7 @@ docker build -t rmitstore .
 
 docker tag rmitstore:latest $ECR_REPO_URI
 
-docker push $ECR_REPO_UR
+docker push $ECR_REPO_URI
 
 # docker kill rmitstore
 

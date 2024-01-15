@@ -1,8 +1,8 @@
 cd RMIT-Store
 
-chmod +x store-script.sh
+chmod +x db-script.sh
 
-./store-script.sh
+./db-script.sh
 
 chmod +x store-script.sh
 
