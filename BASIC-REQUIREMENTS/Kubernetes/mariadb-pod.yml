@@ -15,7 +15,7 @@ spec:
     - name:  MYSQL_PASSWORD
       value: "mariadb"
     - name: MYSQL_ROOT_HOST
-      value:
+      value: "%"
     - name: MYSQL_ROOT_PASSWORD
       value: "mariadb"
     ports:

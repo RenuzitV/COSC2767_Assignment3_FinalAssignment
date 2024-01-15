@@ -1,10 +1,12 @@
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 959445117732.dkr.ecr.us-east-1.amazonaws.com/mariadb
+DB_REPO_URI=959445117732.dkr.ecr.us-east-1.amazonaws.com/mariadb
+
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DB_REPO_URI
 
 docker build -t mariadb .
 
-docker tag mariadb:latest 959445117732.dkr.ecr.us-east-1.amazonaws.com/mariadb:latest
+docker tag mariadb:latest $DB_REPO_URI:latest
 
-docker push 959445117732.dkr.ecr.us-east-1.amazonaws.com/mariadb:latest
+docker push $DB_REPO_URI:latest
 
 # docker kill mariadb
 
