@@ -8,6 +8,8 @@ docker tag mariadb:latest $DB_REPO_URI:latest
 
 docker push $DB_REPO_URI:latest
 
+# if we want to test the network connection on a docker container, uncomment the below lines
+
 # docker kill mariadb
 
 # docker rm mariadb

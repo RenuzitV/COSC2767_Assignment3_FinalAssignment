@@ -14,6 +14,8 @@ docker tag rmitstore:latest $ECR_REPO_URI:latest
 
 docker push $ECR_REPO_URI:latest
 
+# if we want to test the network connection on a docker container, uncomment the below lines
+
 # docker kill rmitstore
 
 # docker rm rmitstore
