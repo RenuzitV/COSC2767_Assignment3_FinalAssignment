@@ -12,6 +12,8 @@ chmod +x store-script.sh
 
 ./store-script.sh
 
+cd ..
+
 cd Kubernetes
 
 kubectl delete all --all --namespace=default
