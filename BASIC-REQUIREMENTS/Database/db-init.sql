@@ -1,3 +1,4 @@
+DROP USER IF EXISTS 'db_admin'@'%';
 CREATE USER 'db_admin'@'%' IDENTIFIED BY 'rmit_password';
 GRANT ALL PRIVILEGES ON *.* TO 'db_admin'@'%';
 FLUSH PRIVILEGES;
