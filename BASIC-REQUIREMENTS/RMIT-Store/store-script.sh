@@ -18,4 +18,4 @@ docker push $ECR_REPO_URI:latest
 
 # docker rm rmitstore
 
-# docker run -d -p 80:80 --name rmitstore rmitstore:latest
+# docker run -d -p 80:80 --name rmitstore --network test_network rmitstore:latest
