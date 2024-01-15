@@ -1,7 +1,8 @@
-cd RMIT-Store
+cd Kubernetes
 
-chmod +x db-script.sh
-./db-script.sh
- 
-chmod +x store-script.sh
-./store-script.sh
+kubectl delete all --all --namespace=default
+
+kubectl create -f mariadb-pod.yml
+kubectl create -f mariadb-service.yml
+kubectl create -f rmit-store-pod.yml
+kubectl create -f rmit-store-service.yml

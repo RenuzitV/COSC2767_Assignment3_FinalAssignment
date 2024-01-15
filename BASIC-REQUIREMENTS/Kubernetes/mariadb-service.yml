@@ -7,8 +7,8 @@ metadata:
     app: demo-store-app
 spec:
   ports:
-  - port: 5432
-    targetPort: 5432
+  - port: 3306
+    targetPort: 3306
   selector:
      name: mariadb-pod
      app: demo-store-app
