@@ -12,8 +12,8 @@ docker tag rmitstore:latest $ECR_REPO_URI
 
 docker push $ECR_REPO_UR
 
-docker kill rmitstore
+# docker kill rmitstore
 
-docker rm rmitstore
+# docker rm rmitstore
 
-docker run -d -p 80:80 --name rmitstore rmitstore:latest
+# docker run -d -p 80:80 --name rmitstore rmitstore:latest
