@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb-deploy
+  labels:
+    name: mariadb-deploy
+    app: demo-store-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mariadb-pod
+      app: demo-store-app
+    
+  template:
+    metadata:
+      name: mariadb-pod
+      labels:
+        name: mariadb-pod
+        app: demo-store-app
+    spec:
+      containers:
+        - name: mariadb
+          image: mariadb
+          ports:
+            - containerPort: 5432
+          env:
+            - name: mariadb_USER
+              value: "mariadb"
+            - name: mariadb_PASSWORD
+              value: "mariadb"
+            - name: mariadb_HOST_AUTH_METHOD
+              value: trust
+     
