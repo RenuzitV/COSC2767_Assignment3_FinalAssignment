@@ -2,6 +2,8 @@ ECR_REPO_URI=959445117732.dkr.ecr.us-east-1.amazonaws.com/rmitstore
 
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REPO_URI
 
+rm -rf COSC2767-RMIT-Store
+
 git clone https://github.com/RenuzitV/COSC2767-RMIT-Store.git
 
 cd COSC2767-RMIT-Store
