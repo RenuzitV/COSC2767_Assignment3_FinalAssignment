@@ -10,4 +10,4 @@ docker kill mariadb
 
 docker rm mariadb
 
-docker run -d -p 3306:3306 --name mariadb mariadb:latest
+docker run --name mariadb-server -v /path/to/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql -p 3306:3306 -d mariadb
