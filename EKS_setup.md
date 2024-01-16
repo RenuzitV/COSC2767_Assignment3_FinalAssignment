@@ -1,4 +1,4 @@
-# EKS Setting up in AWS Environment
+# EKS Setting up in AWS 🛍️
 
 This is the guideline to set up the kubernetes on AWS
 

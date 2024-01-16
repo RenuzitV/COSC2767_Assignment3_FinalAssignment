@@ -1,8 +1,3 @@
-CREATE USER 'db_admin'@'localhost' IDENTIFIED BY 'rmit_password';
-GRANT ALL PRIVILEGES ON *.* TO 'db_admin'@'localhost';
-FLUSH PRIVILEGES;
-
-CREATE DATABASE rmit_store_db;
 USE rmit_store_db;
 
 CREATE TABLE stores (
@@ -13,7 +8,7 @@ CREATE TABLE stores (
   PRIMARY KEY (id)
 ) AUTO_INCREMENT = 1;
 
-INSERT INTO store (Name, Price, ImageUrl) 
+INSERT INTO stores (Name, Price, ImageUrl) 
 VALUES 
   ("Fairtrade Pocket Hoodie", "64.95", "p-1.jpg"),
   ("Fairtrade Zip Hoodie", "59.95", "p-2.jpg"), 
