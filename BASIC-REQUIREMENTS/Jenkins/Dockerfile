@@ -34,7 +34,7 @@ RUN apt-get update && \
     apt-get install -y maven git && \
     rm -rf /var/lib/apt/lists/*
 
-    
+
 # Install Docker CLI
 RUN apt-get update && \
     apt-get install -y apt-transport-https \
@@ -50,9 +50,8 @@ RUN apt-get update && \
     apt-get install -y docker-ce-cli
 
 
-
 # Add Jenkins user to the Docker group
-RUN usermod -aG docker jenkins
+# RUN usermod -aG docker jenkins
 
 # install aws cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
