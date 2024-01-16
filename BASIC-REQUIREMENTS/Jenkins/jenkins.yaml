@@ -19,7 +19,6 @@ jenkins:
       - id: "admin"
         name: "RMIT"
         properties:
-        - "consoleUrlProvider"
         - "myView"
         - "timezone"
         - "experimentalFlags"
