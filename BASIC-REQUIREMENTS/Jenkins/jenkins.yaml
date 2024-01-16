@@ -45,7 +45,7 @@ tool:
       - installSource:
           installers:
           - adoptOpenJdkInstaller:
-              id: "jdk-21.0.1+12"
+              id: "jdk-17+35"
   maven:
     installations:
       - name: "Maven"

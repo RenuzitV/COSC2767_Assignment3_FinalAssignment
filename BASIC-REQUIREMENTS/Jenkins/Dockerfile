@@ -15,10 +15,10 @@ FROM jenkins/jenkins:lts
 
 
 # Skip the initial setup wizard
-ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+# ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
 # Install necessary plugins
-RUN jenkins-plugin-cli --plugins configuration-as-code job-dsl git jdk-tool adoptopenjdk workflow-aggregator maven-plugin deploy
+RUN jenkins-plugin-cli --plugins configuration-as-code job-dsl git jdk-tool adoptopenjdk workflow-aggregator maven-plugin deploy docker-build-step
 
 # Copy JCasC configuration file and Job DSL script into the container
 COPY jenkins.yaml /var/jenkins_home/casc_configs/
@@ -29,12 +29,30 @@ ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc_configs/jenkins.yaml
 
 # Switch to root to install system dependencies
 USER root
+
 RUN apt-get update && \
     apt-get install -y maven git && \
     rm -rf /var/lib/apt/lists/*
 
-# install aws cli
+    
+# Install Docker CLI
+RUN apt-get update && \
+    apt-get install -y apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
+    add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/debian \
+    $(lsb_release -cs) stable" && \
+    apt-get update && \
+    apt-get install -y docker-ce-cli
 
+# Add Jenkins user to the Docker group
+RUN usermod -aG docker jenkins
+
+# install aws cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
     ./aws/install
