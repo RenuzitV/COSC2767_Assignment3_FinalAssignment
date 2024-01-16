@@ -37,6 +37,7 @@ git config --global init.defaultBranch main
 # Clone the project repository
 cd ~
 REPO_NAME=COSC2767_Assignment3_FinalAssignment
+
 rm -rf $REPO_NAME
 
 git clone git@github.com:RenuzitV/$REPO_NAME.git
@@ -44,7 +45,7 @@ git clone git@github.com:RenuzitV/$REPO_NAME.git
 cd $REPO_NAME
 
 # Make script executable
-cd basic-requirements
+cd BASIC-REQUIREMENTS
 chmod +x script.sh
 
 ./script.sh

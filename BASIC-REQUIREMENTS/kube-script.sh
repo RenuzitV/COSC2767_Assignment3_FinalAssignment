@@ -1,6 +1,6 @@
 # if we want to test the network connection on a docker container
-# docker network create --driver bridge test_network
-
+# docker network create --driver bridge test_networ
+# https://github.com/kubernetes/kubernetes/issues/13488
 cd Kubernetes
 
 kubectl delete all --all --namespace=default
