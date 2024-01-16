@@ -1,0 +1,13 @@
+<!--
+#   RMIT University Vietnam
+#   Course: COSC2767 Systems Deployment and Operations
+#   Semester: 2023C
+#   Assessment: Assignment 1
+#   Author: Nguyen Vu Minh Duy
+#   ID: s3878076
+#   Created  date: 27/11/2023 (e.g. 31/07/2023)
+#   Last modified: 02/12/2023 (e.g. 05/08/2023)
+#   Acknowledgement: 
+#
+https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/docs/features/secrets.adoc#passing-credentials-as-encrypted-text 
+-->
