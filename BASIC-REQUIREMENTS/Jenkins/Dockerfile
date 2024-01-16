@@ -17,6 +17,10 @@ FROM jenkins/jenkins:lts
 # Skip the initial setup wizard
 # ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
+
+ARG DOCKER_GROUP_ID
+ENV DOCKER_GROUP_ID ${DOCKER_GROUP_ID:-999}
+
 # Install necessary plugins
 RUN jenkins-plugin-cli --plugins configuration-as-code job-dsl git jdk-tool adoptopenjdk workflow-aggregator maven-plugin deploy docker-build-step
 
@@ -49,10 +53,9 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y docker-ce-cli
 
-
-# Add Jenkins user to the Docker group
-# RUN usermod -aG docker jenkins
-
+RUN groupadd -g ${DOCKER_GROUP_ID} docker && \
+    usermod -aG docker jenkins
+    
 # install aws cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
