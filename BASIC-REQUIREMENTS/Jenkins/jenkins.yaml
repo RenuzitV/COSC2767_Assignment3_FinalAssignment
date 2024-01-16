@@ -17,6 +17,7 @@ jenkins:
       enableCaptcha: false
       users:
       - id: "admin"
+        password: "admin"
         name: "RMIT"
         properties:
         - "myView"
