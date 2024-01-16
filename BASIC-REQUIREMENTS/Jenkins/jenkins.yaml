@@ -19,7 +19,6 @@ jenkins:
       - id: "admin"
         name: "RMIT"
         properties:
-        - "consoleUrlProvider"
         - "myView"
         - "timezone"
         - "experimentalFlags"
@@ -54,14 +53,3 @@ tool:
               installers:
                 - maven:
                     id: "3.9.6"
-
-credentials:
-  system:
-    domainCredentials:
-    - credentials:
-      - usernamePassword:
-          description: "tomcat_developer"
-          id: "tomcat_developer"
-          scope: GLOBAL
-          username: "${TOMCAT_DEV_USERNAME}"
-          password: "${TOMCAT_DEV_PASSWORD}"
