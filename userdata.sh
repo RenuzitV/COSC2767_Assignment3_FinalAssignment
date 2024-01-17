@@ -4,7 +4,6 @@ aws configure set default.region us-east-1
 # Installing dependencies
 yum install git -y
 yum install nano -y
-yum install docker -y
 
 # Retrieve the SSH private key from SSM
 SSH_PRIVATE_KEY=$(aws ssm get-parameter --name "github_PK" --with-decryption --query "Parameter.Value" --output text)
