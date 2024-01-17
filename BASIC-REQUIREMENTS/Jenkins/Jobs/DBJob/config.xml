@@ -43,6 +43,12 @@ docker build -t mariadb .
 docker tag mariadb:latest $DB_REPO_URI:latest
 
 docker push $DB_REPO_URI:latest
+
+kubectl apply -f mariadb-deploy.yml
+
+kubectl apply -f mariadb-service.yml
+
+kubectl rollout restart deployment/mariadb-deploy
 ]]>
             </command>
             <configuredLocalRules />
