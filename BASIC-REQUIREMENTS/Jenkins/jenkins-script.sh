@@ -10,7 +10,6 @@
 # https://stackoverflow.com/questions/30494050/how-do-i-pass-environment-variables-to-docker-containers
 
 JENKINS_REPO_URI=959445117732.dkr.ecr.us-east-1.amazonaws.com/jenkins
-docker run -it --init -v /var/run/docker.sock:/var/run/docker.sock -p 8080:8080 --name jenkins $JENKINS_REPO_URI:latest
 
 docker kill jenkins
 
