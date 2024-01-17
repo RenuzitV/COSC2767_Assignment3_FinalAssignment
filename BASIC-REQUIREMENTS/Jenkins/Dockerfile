@@ -70,8 +70,12 @@ RUN curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11
     chmod +x ./kubectl && \
     mv ./kubectl /usr/local/bin/kubectl
 
-# update kubeconfig
-RUN aws eks update-kubeconfig --name devops-eks-cluster --region us-east-1
+# Copy the entrypoint script into the container
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set the entrypoint to your script
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Switch back to the Jenkins user
 USER jenkins
