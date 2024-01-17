@@ -43,6 +43,12 @@ docker build -t rmitstore .
 docker tag rmitstore:latest $ECR_REPO_URI:latest
 
 docker push $ECR_REPO_URI:latest
+
+kubectl apply -f rmit-store-deploy.yml
+
+kubectl apply -f rmit-store-service.yml
+
+kubectl rollout restart deployment/store-app-deploy
 ]]>
             </command>
             <configuredLocalRules />
