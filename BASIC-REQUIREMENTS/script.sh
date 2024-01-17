@@ -1,5 +1,3 @@
-aws eks update-kubeconfig --name devops-eks-cluster --region us-east-1
-
 yum install docker -y
 
 systemctl enable docker
