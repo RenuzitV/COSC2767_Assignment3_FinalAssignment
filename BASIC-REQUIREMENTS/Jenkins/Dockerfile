@@ -26,7 +26,7 @@ RUN jenkins-plugin-cli --plugins configuration-as-code job-dsl git jdk-tool adop
 
 # Copy JCasC configuration file and Job DSL script into the container
 COPY jenkins.yaml /var/jenkins_home/casc_configs/
-COPY Asm2Job/ /usr/share/jenkins/ref/jobs/Asm2Job
+COPY Jobs/ /usr/share/jenkins/ref/jobs/
 
 # Set the CASC_JENKINS_CONFIG environment variable to point to the JCasC file
 ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc_configs/jenkins.yaml
@@ -63,6 +63,15 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 
 # set aws cli pager to empty string to avoid error
 ENV AWS_PAGER ""
+
+# install kubectl 
+
+RUN curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl && \
+    chmod +x ./kubectl && \
+    mv ./kubectl /usr/local/bin/kubectl
+
+# update kubeconfig
+RUN aws eks update-kubeconfig --name devops-eks-cluster --region us-east-1
 
 # Switch back to the Jenkins user
 USER jenkins
