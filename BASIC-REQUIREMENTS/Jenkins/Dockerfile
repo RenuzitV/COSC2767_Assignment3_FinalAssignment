@@ -17,7 +17,6 @@ FROM jenkins/jenkins:lts
 # Skip the initial setup wizard
 # ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
-
 ARG DOCKER_GROUP_ID
 ENV DOCKER_GROUP_ID ${DOCKER_GROUP_ID:-999}
 
@@ -37,9 +36,16 @@ ENV CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jenkins.yaml \
 # Switch to root to install system dependencies
 USER root
 
+# this command:
+# 1. install docker
+# 2. install aws cli
+# 3. install kubectl
+# 4. install maven
+# 5. install git
+# 6. removes apt cache
 RUN apt-get update && \
     apt-get install -y apt-transport-https \
-    ca-certificates \
+    ca-certificates \ 
     curl \
     gnupg2 \
     software-properties-common \

@@ -4,4 +4,8 @@
 aws eks update-kubeconfig --name devops-eks-cluster --region us-east-1
 
 # Execute the passed command (if any)
-exec "$@"
+if [ $# -eq 0 ]; then
+    exec /usr/local/bin/jenkins.sh
+else
+    exec "$@"
+fi
