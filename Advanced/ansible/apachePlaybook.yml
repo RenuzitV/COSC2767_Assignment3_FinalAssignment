@@ -13,11 +13,11 @@
       register: dockerImagesIds
 
     - name: Stop all containers
-      command: "sudo docker stop my-rmit-store"
+      command: "sudo docker stop rmitstore"
       ignore_errors: yes
 
     - name: Remove all containers
-      command: "sudo docker rm my-rmit-store"
+      command: "sudo docker rm rmitstore"
       ignore_errors: yes
 
     - name: Remove all images
@@ -29,4 +29,4 @@
       ignore_errors: yes
 
     - name: Run the apache container based on pushed docker hub image
-      command: sudo docker run -d --name my-rmit-store --rm -p 80:80 3750945/rmitstore:latest
+      command: sudo docker run -d --name rmitstore --rm -p 80:80 3750945/rmitstore:latest
