@@ -1,0 +1,36 @@
+---
+- name: Setup CloudWatch Monitoring for EKS and ELB
+  hosts: aws_ec2
+  become: yes
+  vars:
+    aws_region: us-east-1
+    eks_cluster_name: devops-eks-cluster
+    elb_name: a894facca31e7414a98522d544a27fbb
+
+  tasks:
+    - name: Copy CloudWatch Agent Config
+      copy:
+        src: cloudwatch-agent-config.json
+        dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+
+    - name: Download CloudWatch Agent
+      get_url:
+        url: https://s3.amazonaws.com/amazoncloudwatch-agent/linux/amd64/latest/AmazonCloudWatchAgent.zip
+        dest: /tmp/AmazonCloudWatchAgent.zip
+
+    - name: Unzip CloudWatch Agent
+      unarchive:
+        src: /tmp/AmazonCloudWatchAgent.zip
+        dest: /tmp/
+        remote_src: yes
+
+    - name: Run CloudWatch Agent install script
+      command: /tmp/install.sh
+      args:
+        chdir: /tmp/
+
+    - name: Start CloudWatch Agent
+      systemd:
+        name: amazon-cloudwatch-agent
+        state: started
+        enabled: yes
