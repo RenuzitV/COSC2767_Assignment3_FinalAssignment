@@ -44,14 +44,15 @@ echo "040421Ed!" | docker login --username 3750945 --password-stdin
 docker build -t $DOCKER_HUB_REPO_URI:latest .
 docker push $DOCKER_HUB_REPO_URI:latest
 
-kubectl create namespace store-app
+APP_NAMESPACE_NAME=store-app
+kubectl create namespace $APP_NAMESPACE_NAME || echo "$APP_NAMESPACE_NAME already exists, skipping"
 
 # Apply Kubernetes configurations
 kubectl apply -f rmit-store-deploy.yml
 kubectl apply -f rmit-store-service.yml
 
 # Restart deployment
-kubectl rollout restart deployment/store-app-deploy
+kubectl rollout restart -n $APP_NAMESPACE_NAME deployment/store-app-deploy
 ]]>
             </command>
             <configuredLocalRules />
