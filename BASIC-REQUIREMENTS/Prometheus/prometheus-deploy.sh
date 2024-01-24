@@ -1,3 +1,6 @@
+# https://docs.aws.amazon.com/eks/latest/userguide/prometheus.html
+# https://devopscube.com/setup-prometheus-monitoring-on-kubernetes/
+
 # install helm
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
 chmod 700 get_helm.sh

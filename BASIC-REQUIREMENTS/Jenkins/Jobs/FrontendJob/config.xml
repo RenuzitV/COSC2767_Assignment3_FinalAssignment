@@ -44,6 +44,8 @@ echo "040421Ed!" | docker login --username 3750945 --password-stdin
 docker build -t $DOCKER_HUB_REPO_URI:latest .
 docker push $DOCKER_HUB_REPO_URI:latest
 
+kubectl create namespace store-app
+
 # Apply Kubernetes configurations
 kubectl apply -f rmit-store-deploy.yml
 kubectl apply -f rmit-store-service.yml
