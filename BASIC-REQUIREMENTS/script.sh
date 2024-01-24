@@ -5,7 +5,7 @@ curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/
     && chmod +x ./kubectl \
     && mv ./kubectl /usr/local/bin/kubectl
 
-aws eks update-kubeconfig --name devops-eks-cluster-2 --region us-east-1
+aws eks update-kubeconfig --name devops-eks-cluster --region us-east-1
 
 systemctl start docker
 
