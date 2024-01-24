@@ -44,6 +44,8 @@ echo "040421Ed!" | docker login --username 3750945 --password-stdin
 docker build -t $DB_REPO_URI:latest .
 docker push $DB_REPO_URI:latest
 
+kubectl create namespace store-app
+
 # Apply Kubernetes configurations
 kubectl apply -f mariadb-deploy.yml
 kubectl apply -f mariadb-service.yml
