@@ -30,3 +30,13 @@ cd Prometheus
 chmod +x prometheus-deploy.sh
 
 ./prometheus-deploy.sh
+
+cd ..
+
+# deploy Grafana for cluster monitoring
+
+cd Grafana
+
+chmod +x grafana-deploy.sh
+
+./grafana-deploy.sh
