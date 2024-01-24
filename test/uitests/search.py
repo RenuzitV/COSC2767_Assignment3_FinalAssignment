@@ -61,3 +61,32 @@ class RMITSearchPage:
 
   def title(self):
     return self.browser.title
+  
+  # integration test
+  def search(self, phrase):
+    search_input = self.browser.find_element(*self.SEARCH_INPUT)
+    search_input.send_keys(phrase + Keys.RETURN)
+
+  def search_value(self):
+    search_input = self.browser.find_element(*self.SEARCH_INPUT)
+    value = search_input.get_attribute('value')
+    return value
+  
+  def search_results(self):
+    return self.browser.find_elements(*self.SEARCH_RESULTS)
+  
+  def search_result_titles(self):
+    titles = self.browser.find_elements(*self.SEARCH_RESULT_TITLES)
+    titles = [t.text for t in titles]
+    return titles
+  
+  def search_result_descriptions(self):
+    descriptions = self.browser.find_elements(*self.SEARCH_RESULT_DESCRIPTIONS)
+    descriptions = [d.text for d in descriptions]
+    return descriptions
+  
+  def search_result_links(self):
+    links = self.browser.find_elements(*self.SEARCH_RESULT_LINKS)
+    links = [l.get_attribute('href') for l in links]
+    return links
+
