@@ -1,11 +1,10 @@
 #   RMIT University Vietnam
 #   Course: COSC2767 Systems Deployment and Operations
-#   Semester: 2023C
-#   Assessment: Assignment 1
-#   Author: Nguyen Vu Minh Duy
-#   ID: s3878076
-#   Created  date: 27/11/2023 (e.g. 31/07/2023)
-#   Last modified: 02/12/2023 (e.g. 05/08/2023)
+#   Semester: 2022B
+#   Assessment: Assignment 3
+#   Author: Trieu Hoang Khang – s3878466, Nguyen Vu Minh Duy – s3878076, Thai Manh Phi – s3878070, Kha Nguyen Anh Tran – s3750945, Nguyen Phuc Cuong – s3881006
+#   Created  date: NaN
+#   Last modified: 25/01/2024
 #   Acknowledgement: 
 # https://www.jenkins.io/doc/book/managing/casc/
 # https://plugins.jenkins.io/configuration-as-code/
