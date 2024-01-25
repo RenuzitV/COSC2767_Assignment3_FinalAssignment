@@ -11,6 +11,9 @@
 
 jenkins:
   systemMessage: "Jenkins configured automatically by JCasC\n"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
   securityRealm:
     local:
       allowsSignup: false
