@@ -3,7 +3,7 @@
 #   Semester: 2023C
 #   Assessment: Assignment 3
 #   Author: Kha Nguyen Anh Tran
-#   ID: s3878076
+#   ID: 3750945
 #   Last modified: 25/12/2023 (e.g. 05/08/2023)
 ---
 - hosts: swarm_manager
@@ -24,8 +24,14 @@
     - name: Install kubectl
       get_url:
         url: "{{ kubectl_url }}"
-        dest: /usr/local/bin/kubectl
+        dest: "/tmp/kubectl"
         mode: '0755'
+
+    - name: Make kubectl executable
+      command: chmod +x /tmp/kubectl
+
+    - name: Move kubectl to /usr/local/bin
+      command: mv /tmp/kubectl /usr/local/bin/kubectl
 
     - name: Update AWS EKS kubeconfig
       command: "aws eks update-kubeconfig --name {{ aws_eks_cluster_name }} --region {{ aws_region }}"
