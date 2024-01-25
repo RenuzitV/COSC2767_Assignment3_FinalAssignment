@@ -48,7 +48,7 @@ kubectl apply --namespace=$APP_NAMESPACE_NAME -f mariadb-deploy.yml
 kubectl apply --namespace=$APP_NAMESPACE_NAME -f mariadb-service.yml
 
 # Restart deployment
-kubectl rollout restart --namespace=$APP_NAMESPACE_NAME deployment/mariadb-deploy
+kubectl rollout restart --namespace=$APP_NAMESPACE_NAME -f mariadb-deploy.yml
 ]]>
             </command>
             <configuredLocalRules />

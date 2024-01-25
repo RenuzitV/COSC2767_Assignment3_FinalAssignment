@@ -5,7 +5,7 @@ helm repo update
 
 kubectl create namespace grafana
 
-helm install grafana grafana/grafana \
+helm upgrade grafana grafana/grafana \
     --namespace grafana \
     --set persistence.storageClassName="gp2" \
     --set persistence.enabled=true \

@@ -31,8 +31,13 @@
 #!/bin/bash
 
 # Initialize a counter for the timeout (2 minutes / 30 seconds)
-max_attempts=5
-attempt=1
+max_lb_error_attempts=5
+lb_attempts=1
+lb_error_sleep_time=30
+
+max_db_error_attempts=6
+db_attempts=1
+db_error_sleep_time=10
 
 # Wait for LoadBalancer URL to become available
 while true; do
@@ -45,21 +50,26 @@ while true; do
         # Check for database connection error
         RESPONSE=$(curl -s http://$LB_URL)
         if echo "$RESPONSE" | grep -q "Database connection error"; then
-            echo "Database connection error detected."
-            exit 1
+            echo "Database connection error detected. Attempt $db_attempts of $max_db_error_attempts"       
+            if [ $db_attempts -eq $max_db_error_attempts ]; then
+                echo "LoadBalancer URL is available, but database is unavailable after 60 seconds, exiting."
+                exit 1
+            fi
+            ((db_attempts++))
+    		sleep $db_error_sleep_time
         else
             echo "No database connection error, proceeding with the pipeline."
             exit 0
         fi
     else
-        if [ $attempt -eq $max_attempts ]; then
+        if [ $lb_attempts -eq $max_lb_error_attempts ]; then
             echo "LoadBalancer URL not available after 2 minutes, exiting."
             exit 1
         fi
-        echo "Waiting for LoadBalancer URL to become available... Attempt $attempt of $max_attempts"
-        ((attempt++))
+        echo "Waiting for LoadBalancer URL to become available... Attempt $lb_attempts of $max_lb_error_attempts"
+        ((lb_attempts++))
+    	sleep $lb_error_sleep_time
     fi
-    sleep 30
 done
 ]]>
             </command>
