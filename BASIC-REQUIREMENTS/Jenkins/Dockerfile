@@ -21,7 +21,7 @@ ARG DOCKER_GROUP_ID
 ENV DOCKER_GROUP_ID ${DOCKER_GROUP_ID:-999}
 
 # Install necessary plugins
-RUN jenkins-plugin-cli --plugins configuration-as-code job-dsl git jdk-tool adoptopenjdk workflow-aggregator maven-plugin deploy docker-build-step
+RUN jenkins-plugin-cli --plugins configuration-as-code job-dsl git jdk-tool adoptopenjdk workflow-aggregator maven-plugin deploy docker-build-step copyartifact
 
 # Copy JCasC configuration file and Job DSL script into the container
 COPY jenkins.yaml /var/jenkins_home/casc_configs/

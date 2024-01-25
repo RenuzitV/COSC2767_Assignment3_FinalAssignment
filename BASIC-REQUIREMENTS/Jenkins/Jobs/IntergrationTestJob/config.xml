@@ -1,0 +1,71 @@
+<project>
+    <description />
+    <keepDependencies>false</keepDependencies>
+    <properties />
+    <scm class="hudson.scm.NullSCM" />
+    <canRoam>true</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <triggers>
+        <jenkins.triggers.ReverseBuildTrigger>
+            <spec />
+            <upstreamProjects>DeployDBToDev, DeployStoreToDev</upstreamProjects>
+            <threshold>
+                <name>SUCCESS</name>
+                <ordinal>0</ordinal>
+                <color>BLUE</color>
+                <completeBuild>true</completeBuild>
+            </threshold>
+        </jenkins.triggers.ReverseBuildTrigger>
+        <hudson.triggers.SCMTrigger>
+            <spec>* * * * *</spec>
+            <ignorePostCommitHooks>false</ignorePostCommitHooks>
+        </hudson.triggers.SCMTrigger>
+    </triggers>
+    <concurrentBuild>false</concurrentBuild>
+    <builders>
+        <hudson.tasks.Shell>
+            <command>
+<![CDATA[
+#!/bin/bash
+
+# Initialize a counter for the timeout (2 minutes / 30 seconds)
+max_attempts=5
+attempt=1
+
+# Wait for LoadBalancer URL to become available
+while true; do
+    # Retrieve the ELB URL
+    LB_URL=$(kubectl get svc store-service -n dev-store-app -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+
+    if [ ! -z "$LB_URL" ]; then
+        echo "LoadBalancer URL is now available: $LB_URL"
+        
+        # Check for database connection error
+        RESPONSE=$(curl -s http://$LB_URL)
+        if echo "$RESPONSE" | grep -q "Database connection error"; then
+            echo "Database connection error detected."
+            exit 1
+        else
+            echo "No database connection error, proceeding with the pipeline."
+            exit 0
+        fi
+    else
+        if [ $attempt -eq $max_attempts ]; then
+            echo "LoadBalancer URL not available after 2 minutes, exiting."
+            exit 1
+        fi
+        echo "Waiting for LoadBalancer URL to become available... Attempt $attempt of $max_attempts"
+        ((attempt++))
+    fi
+    sleep 30
+done
+]]>
+            </command>
+            <configuredLocalRules />
+        </hudson.tasks.Shell>
+    </builders>
+    <publishers />
+    <buildWrappers />
+</project>

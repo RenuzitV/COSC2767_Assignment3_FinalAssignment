@@ -2,12 +2,12 @@
     <actions />
     <description />
     <keepDependencies>false</keepDependencies>
-    <properties />
+    <properties/>
     <scm class="hudson.plugins.git.GitSCM" plugin="git@5.2.1">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
             <hudson.plugins.git.UserRemoteConfig>
-                <url>https://github.com/RenuzitV/COSC2767_RMIT_Store_DB</url>
+                <url>https://github.com/RenuzitV/COSC2767-RMIT-Store</url>
             </hudson.plugins.git.UserRemoteConfig>
         </userRemoteConfigs>
         <branches>
@@ -35,7 +35,7 @@
             <command>
 <![CDATA[
 # Updated to use Docker Hub
-DB_REPO_URI=3750945/mariadb
+DB_REPO_URI=3750945/rmitstore
 
 # Docker Hub login (consider a more secure approach for credentials)
 echo "040421Ed!" | docker login --username 3750945 --password-stdin
@@ -43,21 +43,21 @@ echo "040421Ed!" | docker login --username 3750945 --password-stdin
 # Build and push to Docker Hub
 docker build -t $DB_REPO_URI:latest .
 docker push $DB_REPO_URI:latest
-
-APP_NAMESPACE_NAME=store-app
-kubectl create namespace $APP_NAMESPACE_NAME || echo "$APP_NAMESPACE_NAME already exists, skipping"
-
-# Apply Kubernetes configurations
-kubectl apply -f mariadb-deploy.yml
-kubectl apply -f mariadb-service.yml
-
-# Restart deployment
-kubectl rollout restart -n $APP_NAMESPACE_NAME deployment/mariadb-deploy
 ]]>
             </command>
             <configuredLocalRules />
         </hudson.tasks.Shell>
     </builders>
-    <publishers />
+    <publishers>
+        <hudson.tasks.ArtifactArchiver>
+            <artifacts>*.yml</artifacts>
+            <allowEmptyArchive>false</allowEmptyArchive>
+            <onlyIfSuccessful>false</onlyIfSuccessful>
+            <fingerprint>false</fingerprint>
+            <defaultExcludes>true</defaultExcludes>
+            <caseSensitive>true</caseSensitive>
+            <followSymlinks>false</followSymlinks>
+        </hudson.tasks.ArtifactArchiver>
+    </publishers>
     <buildWrappers />
 </project>
