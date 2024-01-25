@@ -12,8 +12,9 @@
 jenkins:
   systemMessage: "Jenkins configured automatically by JCasC\n"
   authorizationStrategy:
-    loggedInUsersCanDoAnything:
-      allowAnonymousRead: false
+    globalMatrix:
+      grantedPermissions:
+        - "Administer:admin"
   securityRealm:
     local:
       allowsSignup: false
