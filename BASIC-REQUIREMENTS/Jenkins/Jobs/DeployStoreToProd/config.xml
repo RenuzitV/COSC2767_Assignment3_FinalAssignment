@@ -1,0 +1,59 @@
+<project>
+    <actions />
+    <description />
+    <keepDependencies>false</keepDependencies>
+    <properties />
+    <scm class="hudson.scm.NullSCM" />
+    <canRoam>true</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <triggers>
+        <jenkins.triggers.ReverseBuildTrigger>
+            <spec />
+            <upstreamProjects>IntergrationTestJob</upstreamProjects>
+            <threshold>
+                <name>SUCCESS</name>
+                <ordinal>0</ordinal>
+                <color>BLUE</color>
+                <completeBuild>true</completeBuild>
+            </threshold>
+        </jenkins.triggers.ReverseBuildTrigger>
+        <hudson.triggers.SCMTrigger>
+            <spec>* * * * *</spec>
+            <ignorePostCommitHooks>false</ignorePostCommitHooks>
+        </hudson.triggers.SCMTrigger>
+    </triggers>
+    <concurrentBuild>false</concurrentBuild>
+    <builders>
+        <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@722.v0662a_9b_e22a_c">
+            <project>BuildStoreImage</project>
+            <filter />
+            <target />
+            <includeBuildNumberInTargetPath>false</includeBuildNumberInTargetPath>
+            <excludes />
+            <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
+                <stable>true</stable>
+            </selector>
+            <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+        </hudson.plugins.copyartifact.CopyArtifact>
+        <hudson.tasks.Shell>
+            <command>
+<![CDATA[
+APP_NAMESPACE_NAME=prod-store-app
+kubectl create namespace $APP_NAMESPACE_NAME || echo "$APP_NAMESPACE_NAME already exists, skipping"
+
+# Apply Kubernetes configurations
+kubectl apply --namespace=$APP_NAMESPACE_NAME -f rmit-store-deploy.yml
+kubectl apply --namespace=$APP_NAMESPACE_NAME -f rmit-store-service.yml
+
+# Restart deployment
+kubectl rollout restart --namespace=$APP_NAMESPACE_NAME -f rmit-store-deploy.yml
+]]>
+            </command>
+            <configuredLocalRules />
+        </hudson.tasks.Shell>
+    </builders>
+    <publishers />
+    <buildWrappers />
+</project>

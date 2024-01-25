@@ -9,6 +9,8 @@ aws eks update-kubeconfig --name devops-eks-cluster --region us-east-1
 
 systemctl start docker
 
+systemctl enable docker
+
 # deploy Jenkins for CI/CD
 
 cd Jenkins
