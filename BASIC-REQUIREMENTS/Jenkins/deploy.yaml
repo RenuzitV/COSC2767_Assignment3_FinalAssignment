@@ -12,10 +12,14 @@
     kubectl_url: "https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl"
     aws_eks_cluster_name: "devops-eks-cluster"
     aws_region: "us-east-1"
-    jenkins_build_script: "Jenkins/jenkins-build.sh"
-    jenkins_deploy_script: "Jenkins/jenkins-script.sh"
+    jenkins_repo_uri: "3750945/jenkins"
 
   tasks:
+    - name: Install AWS CLI
+      command: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      args:
+        creates: /usr/local/bin/aws
+
     - name: Install Docker
       yum:
         name: docker
@@ -46,16 +50,19 @@
       command: docker swarm init
       ignore_errors: yes
 
-    - name: Set permissions for Jenkins scripts
-      file:
-        path: "{{ item }}"
-        mode: '0755'
-      loop:
-        - "{{ jenkins_build_script }}"
-        - "{{ jenkins_deploy_script }}"
-
     - name: Build Jenkins Docker image
-      command: "sh {{ jenkins_build_script }}"
+      shell: |
+        echo "040421Ed!" | docker login --username 3750945 --password-stdin
+        docker build --build-arg DOCKER_GROUP_ID=$(getent group docker | cut -d: -f3) -t jenkins /root/COSC2767_Assignment3_FinalAssignment/BASIC-REQUIREMENTS/Jenkins
+        docker tag jenkins:latest {{ jenkins_repo_uri }}:latest
+        docker push {{ jenkins_repo_uri }}:latest
+        yes | docker image prune -a
+        yes | docker volume prune -a
+      args:
+        chdir: /root/COSC2767_Assignment3_FinalAssignment/BASIC-REQUIREMENTS/Jenkins
 
     - name: Deploy Jenkins
-      command: "sh {{ jenkins_deploy_script }}"
+      shell: |
+        docker kill jenkins || true
+        docker rm jenkins || true
+        docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 8080:8080 --name jenkins --restart always {{ jenkins_repo_uri }}:latest
