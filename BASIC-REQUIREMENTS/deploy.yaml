@@ -61,8 +61,14 @@
       args:
         chdir: /root/COSC2767_Assignment3_FinalAssignment/BASIC-REQUIREMENTS/Jenkins
 
-    - name: Deploy Jenkins
+    - name: Remove existing Jenkins service (if exists)
+      shell: docker service rm jenkins || true
+
+    - name: Deploy Jenkins as a Docker Swarm service
       shell: |
-        docker kill jenkins || true
-        docker rm jenkins || true
-        docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 8080:8080 --name jenkins --restart always {{ jenkins_repo_uri }}:latest
+        docker service create \
+          --name jenkins \
+          --publish published=8080,target=8080 \
+          --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+          --restart-condition=on-failure \
+          {{ jenkins_repo_uri }}:latest
