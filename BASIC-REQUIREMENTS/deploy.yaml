@@ -1,0 +1,55 @@
+#   RMIT University Vietnam
+#   Course: COSC2767 Systems Deployment and Operations
+#   Semester: 2023C
+#   Assessment: Assignment 3
+#   Author: Kha Nguyen Anh Tran
+#   ID: s3878076
+#   Last modified: 25/12/2023 (e.g. 05/08/2023)
+---
+- hosts: swarm_manager
+  become: yes
+  vars:
+    kubectl_url: "https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl"
+    aws_eks_cluster_name: "devops-eks-cluster"
+    aws_region: "us-east-1"
+    jenkins_build_script: "Jenkins/jenkins-build.sh"
+    jenkins_deploy_script: "Jenkins/jenkins-script.sh"
+
+  tasks:
+    - name: Install Docker
+      yum:
+        name: docker
+        state: present
+
+    - name: Install kubectl
+      get_url:
+        url: "{{ kubectl_url }}"
+        dest: /usr/local/bin/kubectl
+        mode: '0755'
+
+    - name: Update AWS EKS kubeconfig
+      command: "aws eks update-kubeconfig --name {{ aws_eks_cluster_name }} --region {{ aws_region }}"
+
+    - name: Start and enable Docker service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Initialize Docker Swarm
+      command: docker swarm init
+      ignore_errors: yes
+
+    - name: Set permissions for Jenkins scripts
+      file:
+        path: "{{ item }}"
+        mode: '0755'
+      loop:
+        - "{{ jenkins_build_script }}"
+        - "{{ jenkins_deploy_script }}"
+
+    - name: Build Jenkins Docker image
+      command: "sh {{ jenkins_build_script }}"
+
+    - name: Deploy Jenkins
+      command: "sh {{ jenkins_deploy_script }}"
