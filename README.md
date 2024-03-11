@@ -13,6 +13,5 @@ The script then goes into `BASIC-REQUIREMENTS` and deploys the following service
 
 The pipeline tests the connection between two services: a `MariaDB` database connection to a `PHP` website hosted with `Apache`. 
 
-Database repository: <a> https://github.com/RenuzitV/COSC2767_RMIT_Store_DB </a>
-
-Website repository: <a> https://github.com/RenuzitV/COSC2767-RMIT-Store </a>
+<a href="https://github.com/RenuzitV/COSC2767_RMIT_Store_DB">Database repository</a>
+<a href="https://github.com/RenuzitV/COSC2767-RMIT-Store">Website repository</a>
